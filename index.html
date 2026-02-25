@@ -80,15 +80,22 @@ button:active{
 
 <!-- 支付界面 -->
 <div id="payPage" class="hidden">
-  <div class="message">支付失败❌扣除10000点信用点数</div>
+  <div class="message">支付失败❌并扣除10000点信用点数</div>
   <div class="message" id="countdown1">88</div>
   <div class="message" style="color:red;">倒计时结束后返回主页</div>
+  <button onclick="goHome()">Home</button>
+</div>
+   <!-- 模拟余额 -->
+  <div class="balance-box">
+    <div class="balance-title">你的账户余额</div>
+    <div class="balance-amount" id="accountBalance">10000€</div>
+  </div>
   <button onclick="goHome()">Home</button>
 </div>
 
 <!-- 免费查看界面 -->
 <div id="freePage" class="hidden">
-  <div class="message">赵宇航超爱❤️TCC</div>
+  <div class="message">赵宇航超爱❤️CC</div>
   <button onclick="rosePage()">送出520朵玫瑰祝福他们</button>
   <button onclick="doomPage()">祝福你妈了个逼</button>
   <br>
