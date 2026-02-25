@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>赵宇航有些话想对你说</title>
+  <title>赵宇航有些话想对你说（点击查看）</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@
 
   <!-- 初始界面 -->
   <div id="home">
-    <button onclick="showOptions()">赵宇航有些话想对你说</button>
+    <button onclick="showOptions()">赵宇航有些话想对你说（点击查看）</button>
   </div>
 
   <!-- 第二界面 -->
@@ -43,14 +43,15 @@
 
   <!-- 支付界面 -->
   <div id="payPage" class="hidden">
-    <div class="message">支付成功 ✅</div>
+    <div class="message">支付失败❌扣除10000信用点</div>
     <div class="message" id="countdown">88</div>
+    <div class="message" style="font-size:20px; color:red;">倒计时结束后返回主页</div>
     <button onclick="goHome()">Home</button>
   </div>
 
   <!-- 免费查看界面 -->
   <div id="freePage" class="hidden">
-    <div class="message">赵宇航超爱❤️程甜甜</div>
+    <div class="message">赵宇航超爱❤️程田田</div>
     <button onclick="goHome()">Home</button>
   </div>
 
