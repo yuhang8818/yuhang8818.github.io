@@ -1,26 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>我的个人网站</title>
+  <title>赵宇航有些话想对你说</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
       text-align: center;
-      font-family: Arial;
-      background-color: #f4f4f4;
+      background-color: #fefefe;
       padding-top: 100px;
     }
-    h1 {
-      font-size: 40px;
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 15px;
+      cursor: pointer;
+      border-radius: 5px;
     }
-    p {
-      font-size: 20px;
-      color: gray;
+    .hidden {
+      display: none;
+    }
+    .message {
+      font-size: 24px;
+      margin: 40px 0;
     }
   </style>
 </head>
 <body>
-  <h1>你好，我是 赵宇航</h1>
-  <p>这是我的第一个个人网站。</p>
+
+  <!-- 初始界面 -->
+  <div id="home">
+    <button onclick="showOptions()">赵宇航有些话想对你说</button>
+  </div>
+
+  <!-- 第二界面 -->
+  <div id="options" class="hidden">
+    <button onclick="pay()">支付888€查看答案</button>
+    <button onclick="freeView()">免费查看</button>
+    <br>
+    <button onclick="goHome()">Home</button>
+  </div>
+
+  <!-- 支付界面 -->
+  <div id="payPage" class="hidden">
+    <div class="message">支付成功 ✅</div>
+    <div class="message" id="countdown">88</div>
+    <button onclick="goHome()">Home</button>
+  </div>
+
+  <!-- 免费查看界面 -->
+  <div id="freePage" class="hidden">
+    <div class="message">赵宇航超爱❤️程甜甜</div>
+    <button onclick="goHome()">Home</button>
+  </div>
+
+  <script>
+    function showOptions() {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('options').classList.remove('hidden');
+    }
+
+    function pay() {
+      document.getElementById('options').classList.add('hidden');
+      document.getElementById('payPage').classList.remove('hidden');
+
+      let countdown = 88;
+      const countdownEl = document.getElementById('countdown');
+      countdownEl.textContent = countdown;
+
+      const interval = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(interval);
+          goHome();
+        }
+      }, 1000);
+    }
+
+    function freeView() {
+      document.getElementById('options').classList.add('hidden');
+      document.getElementById('freePage').classList.remove('hidden');
+    }
+
+    function goHome() {
+      document.getElementById('home').classList.remove('hidden');
+      document.getElementById('options').classList.add('hidden');
+      document.getElementById('payPage').classList.add('hidden');
+      document.getElementById('freePage').classList.add('hidden');
+    }
+  </script>
+
 </body>
 </html>
