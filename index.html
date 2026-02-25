@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>赵宇航有些话想对你说</title>
-
 <style>
 body{
   font-family: Arial;
@@ -18,10 +17,24 @@ button{
   margin:15px;
   cursor:pointer;
   border-radius:8px;
+  transition: all 0.2s ease;
+}
+
+button:active{
+  transform: scale(0.95);
 }
 
 .hidden{
   display:none;
+}
+
+.fade-in{
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
 .message{
@@ -50,12 +63,11 @@ button{
 }
 </style>
 </head>
-
 <body>
 
 <!-- 首页 -->
 <div id="home">
-  <button onclick="showOptions()">赵宇航有些话想对你说</button>
+  <button onclick="showPage('options')">赵宇航有些话想对你说</button>
 </div>
 
 <!-- 第二页 -->
@@ -70,14 +82,13 @@ button{
 <div id="payPage" class="hidden">
   <div class="message">支付成功 ✅</div>
   <div class="message" id="countdown1">88</div>
-  <div style="color:red;">倒计时结束后返回主页</div>
+  <div class="message" style="color:red;">倒计时结束后返回主页</div>
   <button onclick="goHome()">Home</button>
 </div>
 
 <!-- 免费查看界面 -->
 <div id="freePage" class="hidden">
   <div class="message">赵宇航超爱❤️程甜甜</div>
-
   <button onclick="rosePage()">送出520朵玫瑰祝福他们</button>
   <button onclick="doomPage()">祝福你大爷</button>
   <br>
@@ -90,7 +101,7 @@ button{
 
   <div class="balance-box">
     <div class="balance-title">HSBC 汇丰银行账户余额</div>
-    <div class="balance-amount">+888€</div>
+    <div class="balance-amount" id="balanceAmount">0€</div>
   </div>
 
   <br>
@@ -100,39 +111,38 @@ button{
 <!-- 自毁界面 -->
 <div id="doomPage" class="hidden">
   <div class="message" id="countdown2">88</div>
-  <div style="color:red;">倒计时结束后启动自毁程序</div>
+  <div class="message" style="color:red;">倒计时结束后启动自毁程序</div>
   <button onclick="goHome()">Home</button>
 </div>
 
 <script>
-
+/* 公共函数 */
 function hideAll(){
-  document.getElementById('home').classList.add('hidden');
-  document.getElementById('options').classList.add('hidden');
-  document.getElementById('payPage').classList.add('hidden');
-  document.getElementById('freePage').classList.add('hidden');
-  document.getElementById('rosePage').classList.add('hidden');
-  document.getElementById('doomPage').classList.add('hidden');
+  const ids = ['home','options','payPage','freePage','rosePage','doomPage'];
+  ids.forEach(id=>{
+    const el = document.getElementById(id);
+    el.classList.add('hidden');
+    el.classList.remove('fade-in');
+  });
+}
+
+function showPage(id){
+  hideAll();
+  const el = document.getElementById(id);
+  el.classList.remove('hidden');
+  el.classList.add('fade-in');
 }
 
 function goHome(){
-  hideAll();
-  document.getElementById('home').classList.remove('hidden');
+  showPage('home');
 }
 
-function showOptions(){
-  hideAll();
-  document.getElementById('options').classList.remove('hidden');
-}
-
+/* 支付界面倒计时 */
 function pay(){
-  hideAll();
-  document.getElementById('payPage').classList.remove('hidden');
-
+  showPage('payPage');
   let time = 88;
   const el = document.getElementById('countdown1');
   el.textContent = time;
-
   const timer = setInterval(()=>{
     time--;
     el.textContent = time;
@@ -143,24 +153,24 @@ function pay(){
   },1000);
 }
 
+/* 免费查看界面 */
 function freeView(){
-  hideAll();
-  document.getElementById('freePage').classList.remove('hidden');
+  showPage('freePage');
 }
 
+/* 送玫瑰界面 */
 function rosePage(){
-  hideAll();
-  document.getElementById('rosePage').classList.remove('hidden');
+  showPage('rosePage');
+  const el = document.getElementById('balanceAmount');
+  animateBalance(el,888);
 }
 
+/* 自毁倒计时界面 */
 function doomPage(){
-  hideAll();
-  document.getElementById('doomPage').classList.remove('hidden');
-
+  showPage('doomPage');
   let time = 88;
   const el = document.getElementById('countdown2');
   el.textContent = time;
-
   const timer = setInterval(()=>{
     time--;
     el.textContent = time;
@@ -170,7 +180,17 @@ function doomPage(){
   },1000);
 }
 
+/* 余额数字动画 */
+function animateBalance(el,target){
+  let current = 0;
+  const step = Math.ceil(target/50); // 分50步增长
+  const timer = setInterval(()=>{
+    current += step;
+    if(current>=target) current = target;
+    el.textContent = `+${current}€`;
+    if(current>=target) clearInterval(timer);
+  },20);
+}
 </script>
-
 </body>
 </html>
