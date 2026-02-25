@@ -1,96 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>赵宇航有些话想对你说（点击查看）</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #fefefe;
-      padding-top: 100px;
-    }
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 15px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .hidden {
-      display: none;
-    }
-    .message {
-      font-size: 24px;
-      margin: 40px 0;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>赵宇航有些话想对你说</title>
+
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  background:#f4f4f4;
+  padding-top:100px;
+}
+
+button{
+  font-size:18px;
+  padding:10px 20px;
+  margin:15px;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+.hidden{
+  display:none;
+}
+
+.message{
+  font-size:26px;
+  margin:30px 0;
+}
+
+.balance-box{
+  margin-top:30px;
+  padding:20px;
+  border:2px solid #ccc;
+  border-radius:12px;
+  display:inline-block;
+  background:white;
+}
+
+.balance-title{
+  font-size:20px;
+  color:gray;
+}
+
+.balance-amount{
+  font-size:40px;
+  color:green;
+  margin-top:10px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- 初始界面 -->
-  <div id="home">
-    <button onclick="showOptions()">赵宇航有些话想对你说（点击查看）</button>
+<!-- 首页 -->
+<div id="home">
+  <button onclick="showOptions()">赵宇航有些话想对你说</button>
+</div>
+
+<!-- 第二页 -->
+<div id="options" class="hidden">
+  <button onclick="pay()">支付888€查看答案</button>
+  <button onclick="freeView()">免费查看</button>
+  <br>
+  <button onclick="goHome()">Home</button>
+</div>
+
+<!-- 支付界面 -->
+<div id="payPage" class="hidden">
+  <div class="message">支付成功 ✅</div>
+  <div class="message" id="countdown1">88</div>
+  <div style="color:red;">倒计时结束后返回主页</div>
+  <button onclick="goHome()">Home</button>
+</div>
+
+<!-- 免费查看界面 -->
+<div id="freePage" class="hidden">
+  <div class="message">赵宇航超爱❤️程甜甜</div>
+
+  <button onclick="rosePage()">送出520朵玫瑰祝福他们</button>
+  <button onclick="doomPage()">祝福你大爷</button>
+  <br>
+  <button onclick="goHome()">Home</button>
+</div>
+
+<!-- 玫瑰界面 -->
+<div id="rosePage" class="hidden">
+  <div class="message">恭喜你获得皇族赵家的恩宠</div>
+
+  <div class="balance-box">
+    <div class="balance-title">HSBC 汇丰银行账户余额</div>
+    <div class="balance-amount">+888€</div>
   </div>
 
-  <!-- 第二界面 -->
-  <div id="options" class="hidden">
-    <button onclick="pay()">支付888€查看答案</button>
-    <button onclick="freeView()">免费查看</button>
-    <br>
-    <button onclick="goHome()">Home</button>
-  </div>
+  <br>
+  <button onclick="goHome()">Home</button>
+</div>
 
-  <!-- 支付界面 -->
-  <div id="payPage" class="hidden">
-    <div class="message">支付失败❌扣除10000信用点</div>
-    <div class="message" id="countdown">88</div>
-    <div class="message" style="font-size:20px; color:red;">倒计时结束后返回主页</div>
-    <button onclick="goHome()">Home</button>
-  </div>
+<!-- 自毁界面 -->
+<div id="doomPage" class="hidden">
+  <div class="message" id="countdown2">88</div>
+  <div style="color:red;">倒计时结束后启动自毁程序</div>
+  <button onclick="goHome()">Home</button>
+</div>
 
-  <!-- 免费查看界面 -->
-  <div id="freePage" class="hidden">
-    <div class="message">赵宇航超爱❤️程田田</div>
-    <button onclick="goHome()">Home</button>
-  </div>
+<script>
 
-  <script>
-    function showOptions() {
-      document.getElementById('home').classList.add('hidden');
-      document.getElementById('options').classList.remove('hidden');
+function hideAll(){
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('options').classList.add('hidden');
+  document.getElementById('payPage').classList.add('hidden');
+  document.getElementById('freePage').classList.add('hidden');
+  document.getElementById('rosePage').classList.add('hidden');
+  document.getElementById('doomPage').classList.add('hidden');
+}
+
+function goHome(){
+  hideAll();
+  document.getElementById('home').classList.remove('hidden');
+}
+
+function showOptions(){
+  hideAll();
+  document.getElementById('options').classList.remove('hidden');
+}
+
+function pay(){
+  hideAll();
+  document.getElementById('payPage').classList.remove('hidden');
+
+  let time = 88;
+  const el = document.getElementById('countdown1');
+  el.textContent = time;
+
+  const timer = setInterval(()=>{
+    time--;
+    el.textContent = time;
+    if(time<=0){
+      clearInterval(timer);
+      goHome();
     }
+  },1000);
+}
 
-    function pay() {
-      document.getElementById('options').classList.add('hidden');
-      document.getElementById('payPage').classList.remove('hidden');
+function freeView(){
+  hideAll();
+  document.getElementById('freePage').classList.remove('hidden');
+}
 
-      let countdown = 88;
-      const countdownEl = document.getElementById('countdown');
-      countdownEl.textContent = countdown;
+function rosePage(){
+  hideAll();
+  document.getElementById('rosePage').classList.remove('hidden');
+}
 
-      const interval = setInterval(() => {
-        countdown--;
-        countdownEl.textContent = countdown;
-        if (countdown <= 0) {
-          clearInterval(interval);
-          goHome();
-        }
-      }, 1000);
+function doomPage(){
+  hideAll();
+  document.getElementById('doomPage').classList.remove('hidden');
+
+  let time = 88;
+  const el = document.getElementById('countdown2');
+  el.textContent = time;
+
+  const timer = setInterval(()=>{
+    time--;
+    el.textContent = time;
+    if(time<=0){
+      clearInterval(timer);
     }
+  },1000);
+}
 
-    function freeView() {
-      document.getElementById('options').classList.add('hidden');
-      document.getElementById('freePage').classList.remove('hidden');
-    }
-
-    function goHome() {
-      document.getElementById('home').classList.remove('hidden');
-      document.getElementById('options').classList.add('hidden');
-      document.getElementById('payPage').classList.add('hidden');
-      document.getElementById('freePage').classList.add('hidden');
-    }
-  </script>
+</script>
 
 </body>
 </html>
