@@ -19,7 +19,6 @@ button{
   border-radius:8px;
   transition: all 0.2s ease;
 }
-
 button:active{
   transform: scale(0.95);
 }
@@ -27,16 +26,13 @@ button:active{
 .hidden{
   display:none;
 }
-
 .fade-in{
   animation: fadeIn 0.5s ease forwards;
 }
-
 @keyframes fadeIn{
   from{opacity:0;}
   to{opacity:1;}
 }
-
 .message{
   font-size:26px;
   margin:30px 0;
@@ -68,6 +64,12 @@ button:active{
 <!-- 首页 -->
 <div id="home">
   <button onclick="showPage('options')">赵宇航有些话想对你说（点击查看）</button>
+  <br>
+  <button onclick="earnMoney()">点击赚钱（你会需要的）</button>
+  <div class="balance-box">
+    <div class="balance-title">账户余额</div>
+    <div class="balance-amount" id="dynamicBalance">0€</div>
+  </div>
 </div>
 
 <!-- 第二页 -->
@@ -80,15 +82,12 @@ button:active{
 
 <!-- 支付界面 -->
 <div id="payPage" class="hidden">
-  <div class="message">支付失败❌并扣除10000点信用点数</div>
-  <div class="message" id="countdown1">88</div>
+  <div class="message">支付失败❌扣除余额至赵宇航的钱包</div>
+  <div class="message" id="countdown1">18</div>
   <div class="message" style="color:red;">倒计时结束后返回主页</div>
-  <button onclick="goHome()">Home</button>
-</div>
-   <!-- 模拟余额 -->
   <div class="balance-box">
     <div class="balance-title">你的账户余额</div>
-    <div class="balance-amount" id="accountBalance">10000€</div>
+    <div class="balance-amount" id="accountBalance">0€</div>
   </div>
   <button onclick="goHome()">Home</button>
 </div>
@@ -105,12 +104,10 @@ button:active{
 <!-- 玫瑰界面 -->
 <div id="rosePage" class="hidden">
   <div class="message">恭喜你获得皇族赵家的恩宠</div>
-
   <div class="balance-box">
     <div class="balance-title">HSBC 汇丰银行账户余额</div>
     <div class="balance-amount" id="balanceAmount">0€</div>
   </div>
-
   <br>
   <button onclick="goHome()">Home</button>
 </div>
@@ -123,6 +120,9 @@ button:active{
 </div>
 
 <script>
+/* 全局变量：动态余额 */
+let dynamicBalance = 0;
+
 /* 公共函数 */
 function hideAll(){
   const ids = ['home','options','payPage','freePage','rosePage','doomPage'];
@@ -142,25 +142,54 @@ function showPage(id){
 
 function goHome(){
   showPage('home');
+  updateDynamicBalanceDisplay();
 }
 
-/* 支付界面倒计时 */
+/* 首页点击赚钱 */
+function earnMoney(){
+  dynamicBalance += 100;
+  updateDynamicBalanceDisplay();
+}
+
+function updateDynamicBalanceDisplay(){
+  const el = document.getElementById('dynamicBalance');
+  el.textContent = `${dynamicBalance}€`;
+}
+
+/* 支付界面 */
 function pay(){
   showPage('payPage');
+
+  // 倒计时
   let time = 88;
-  const el = document.getElementById('countdown1');
-  el.textContent = time;
-  const timer = setInterval(()=>{
+  const elCountdown = document.getElementById('countdown1');
+  elCountdown.textContent = time;
+  const countdownTimer = setInterval(()=>{
     time--;
-    el.textContent = time;
+    elCountdown.textContent = time;
     if(time<=0){
-      clearInterval(timer);
+      clearInterval(countdownTimer);
       goHome();
     }
   },1000);
+
+  // 余额递减动画，从动态余额扣到0
+  const balanceEl = document.getElementById('accountBalance');
+  let balance = dynamicBalance; // 使用动态余额
+  const step = Math.ceil(balance/100); 
+  const balanceTimer = setInterval(()=>{
+    balance -= step;
+    if(balance<=0) balance=0;
+    balanceEl.textContent = `${balance}€`;
+    if(balance<=0) clearInterval(balanceTimer);
+  },20);
+
+  // 扣完之后更新全局余额
+  dynamicBalance = 0;
+  updateDynamicBalanceDisplay();
 }
 
-/* 免费查看界面 */
+/* 免费查看 */
 function freeView(){
   showPage('freePage');
 }
@@ -190,7 +219,7 @@ function doomPage(){
 /* 余额数字动画 */
 function animateBalance(el,target){
   let current = 0;
-  const step = Math.ceil(target/50); // 分50步增长
+  const step = Math.ceil(target/50);
   const timer = setInterval(()=>{
     current += step;
     if(current>=target) current = target;
