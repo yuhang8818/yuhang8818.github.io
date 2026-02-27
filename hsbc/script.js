@@ -1,7 +1,7 @@
 // Simulated user data
 let user = {
   name: "Zhao Yuhang",
-  balance: 5000,
+  balance: 832905.69,
   transactions: []
 };
 
