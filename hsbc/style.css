@@ -93,15 +93,16 @@ li{
   margin-top:10px;
 }
 
-/* Progress Bar (non-blocking) */
+/* Progress Bar (hidden by default) */
 #progressOverlay{
   position:fixed;
   top:10px;
   left:10px;
   width:calc(100% - 20px);
   height:30px;
-  pointer-events:none;
+  pointer-events:none; /* 不阻挡操作 */
   z-index:1000;
+  display:none; /* 默认隐藏 */
 }
 
 #progressContainer{
