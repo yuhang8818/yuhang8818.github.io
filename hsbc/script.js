@@ -17,6 +17,11 @@ const balanceEl = document.getElementById("balance");
 const transactionsEl = document.getElementById("transactions");
 const loginError = document.getElementById("loginError");
 
+// Progress bar elements
+const progressOverlay = document.getElementById("progressOverlay");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+
 // Login function (simulated)
 function login(){
   const username = document.getElementById("username").value;
@@ -30,6 +35,28 @@ function login(){
   }
 }
 
+// Show progress bar (fast)
+function showProgress(callback){
+  progressOverlay.classList.remove("hidden");
+  progressBar.style.width = "0%";
+  progressText.textContent = "0%";
+
+  let percent = 0;
+  const interval = setInterval(()=>{
+    percent += Math.floor(Math.random()*10)+5; // fast random increment
+    if(percent>=100) percent = 100;
+    progressBar.style.width = percent + "%";
+    progressText.textContent = percent + "%";
+    if(percent>=100){
+      clearInterval(interval);
+      setTimeout(()=>{
+        progressOverlay.classList.add("hidden");
+        if(callback) callback();
+      },100);
+    }
+  },50);
+}
+
 // Update account info
 function updateBankPage(){
   displayName.textContent = user.name;
@@ -38,13 +65,8 @@ function updateBankPage(){
   user.transactions.slice().reverse().forEach(t=>{
     const li = document.createElement("li");
     li.textContent = t.text;
-
-    // 根据类型改变颜色
-    if(t.type === "expense"){
-      li.style.color = "red";  // 扣钱红色
-    } else if(t.type === "income"){
-      li.style.color = "#00ff00"; // 收入绿色
-    }
+    if(t.type==="expense") li.style.color = "red";
+    else if(t.type==="income") li.style.color = "#00ff00";
     transactionsEl.appendChild(li);
   });
 }
@@ -74,30 +96,30 @@ function makeTransfer(){
     alert("Insufficient balance!");
     return;
   }
-  user.balance -= amount;
 
-  // 支出：红色带 - 符号
-  user.transactions.push({text:`- ${amount}€ → ${recipient} (Acc: ${accountNumber})`, type:"expense"});
-
-  goBack();
+  showProgress(()=>{
+    user.balance -= amount;
+    user.transactions.push({text:`- ${amount}€ → ${recipient} (Acc: ${accountNumber})`, type:"expense"});
+    goBack();
+  });
 }
 
-// Deposit (income)
+// Deposit function
 function makeDeposit(){
   const amount = parseFloat(document.getElementById("depositAmount").value);
   if(isNaN(amount) || amount<=0){
     alert("Please enter a valid amount!");
     return;
   }
-  user.balance += amount;
 
-  // 收入：绿色带 + 符号
-  user.transactions.push({text:`+ ${amount}€ Deposit`, type:"income"});
-
-  goBack();
+  showProgress(()=>{
+    user.balance += amount;
+    user.transactions.push({text:`+ ${amount}€ Deposit`, type:"income"});
+    goBack();
+  });
 }
 
-// Withdraw (expense)
+// Withdraw function
 function makeWithdraw(){
   const amount = parseFloat(document.getElementById("withdrawAmount").value);
   if(isNaN(amount) || amount<=0){
@@ -108,12 +130,12 @@ function makeWithdraw(){
     alert("Insufficient balance!");
     return;
   }
-  user.balance -= amount;
 
-  // 支出：红色带 - 符号
-  user.transactions.push({text:`- ${amount}€ Withdraw`, type:"expense"});
-
-  goBack();
+  showProgress(()=>{
+    user.balance -= amount;
+    user.transactions.push({text:`- ${amount}€ Withdraw`, type:"expense"});
+    goBack();
+  });
 }
 
 // Logout
