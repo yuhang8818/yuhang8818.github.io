@@ -1,6 +1,7 @@
 body{
   font-family: Arial, sans-serif;
-  background:#f4f4f4;
+  background:#333333; /* 背景灰色 */
+  color:white;        /* 文字白色 */
   text-align:center;
   padding:20px;
 }
@@ -14,7 +15,7 @@ body{
 }
 
 h1,h2{
-  color:#d50000; /* 汇丰红 */
+  color:#ffffff; /* 标题文字白色 */
 }
 
 input{
@@ -24,7 +25,13 @@ input{
   width:80%;
   font-size:16px;
   border-radius:6px;
-  border:1px solid #ccc;
+  border:1px solid #555;
+  background:#555;      /* 输入框背景深灰 */
+  color:white;          /* 输入框文字白色 */
+}
+
+input::placeholder{
+  color:#ccc;           /* 占位文字灰色 */
 }
 
 button{
@@ -48,13 +55,21 @@ button:active{
 }
 
 .balance-box{
-  background:white;
+  background:#444; /* 卡片深灰背景 */
   border-radius:12px;
   padding:20px;
   margin:20px auto;
   width:90%;
   max-width:300px;
-  border:1px solid #ccc;
+  border:1px solid #555;
+}
+
+.balance-box div{
+  color:white; /* 默认文字白色 */
+}
+
+#balance, #balanceAmount, .balance-amount{
+  color: #00ff00; /* 数字绿色 */
 }
 
 ul{
@@ -63,14 +78,15 @@ ul{
 }
 
 li{
-  background:white;
+  background:#444; /* 交易记录深灰卡片 */
   padding:10px;
   margin:5px auto;
   width:90%;
   max-width:300px;
   border-radius:6px;
   text-align:left;
-  border:1px solid #ccc;
+  border:1px solid #555;
+  color:#00ff00;  /* 交易金额绿色 */
 }
 
 .error{
