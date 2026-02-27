@@ -26,7 +26,7 @@ function login(){
     bankPage.classList.remove("hidden");
     updateBankPage();
   } else {
-    loginError.textContent = "请输入用户名和密码";
+    loginError.textContent = "Please enter your username and password.";
   }
 }
 
@@ -60,15 +60,15 @@ function makeTransfer(){
   const accountNumber = document.getElementById("accountNumber").value;
   const amount = parseFloat(document.getElementById("transferAmount").value);
   if(!recipient || !accountNumber || isNaN(amount) || amount<=0){
-    alert("请输入正确的转账信息！");
+    alert("Please enter the correct transfer information!");
     return;
   }
   if(amount>user.balance){
-    alert("余额不足！");
+    alert("Insufficient balance!");
     return;
   }
   user.balance -= amount;
-  user.transactions.push(`转账 ${amount}€ → ${recipient}（账号：${accountNumber}）`);
+  user.transactions.push(`transfer ${amount}€ → ${recipient}（account：${accountNumber}）`);
   goBack();
 }
 
@@ -76,11 +76,11 @@ function makeTransfer(){
 function makeDeposit(){
   const amount = parseFloat(document.getElementById("depositAmount").value);
   if(isNaN(amount) || amount<=0){
-    alert("请输入正确金额！");
+    alert("Please enter the correct amount！");
     return;
   }
   user.balance += amount;
-  user.transactions.push(`充值 ${amount}€`);
+  user.transactions.push(`top up ${amount}€`);
   goBack();
 }
 
@@ -88,15 +88,15 @@ function makeDeposit(){
 function makeWithdraw(){
   const amount = parseFloat(document.getElementById("withdrawAmount").value);
   if(isNaN(amount) || amount<=0){
-    alert("请输入正确金额！");
+    alert("Please enter the correct amount！");
     return;
   }
   if(amount>user.balance){
-    alert("余额不足！");
+    alert("Insufficient balance！");
     return;
   }
   user.balance -= amount;
-  user.transactions.push(`提现 ${amount}€`);
+  user.transactions.push(`Withdraw ${amount}€`);
   goBack();
 }
 
