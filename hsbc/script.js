@@ -1,11 +1,10 @@
-// Simulated user data
 let user = {
   name: "Zhao Yuhang",
-  balance: 832905.69,
+  balance: 832918.26,
   transactions: []
 };
 
-// Page elements
+// Elements
 const loginPage = document.getElementById("loginPage");
 const bankPage = document.getElementById("bankPage");
 const transferPage = document.getElementById("transferPage");
@@ -17,12 +16,11 @@ const balanceEl = document.getElementById("balance");
 const transactionsEl = document.getElementById("transactions");
 const loginError = document.getElementById("loginError");
 
-// Progress bar elements
 const progressOverlay = document.getElementById("progressOverlay");
 const progressBar = document.getElementById("progressBar");
 const progressText = document.getElementById("progressText");
 
-// Login function (simulated)
+// Login
 function login(){
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
@@ -35,43 +33,37 @@ function login(){
   }
 }
 
-// Show progress bar (fast)
+// Show progress (non-blocking)
 function showProgress(callback){
-  progressOverlay.classList.remove("hidden");
-  progressBar.style.width = "0%";
-  progressText.textContent = "0%";
-
+  progressBar.style.width="0%";
+  progressText.textContent="0%";
   let percent = 0;
   const interval = setInterval(()=>{
-    percent += Math.floor(Math.random()*10)+5; // fast random increment
-    if(percent>=100) percent = 100;
-    progressBar.style.width = percent + "%";
-    progressText.textContent = percent + "%";
+    percent += Math.floor(Math.random()*10)+10;
+    if(percent>100) percent=100;
+    progressBar.style.width = percent+"%";
+    progressText.textContent = percent+"%";
     if(percent>=100){
       clearInterval(interval);
-      setTimeout(()=>{
-        progressOverlay.classList.add("hidden");
-        if(callback) callback();
-      },100);
+      if(callback) callback();
     }
-  },50);
+  },20);
 }
 
 // Update account info
 function updateBankPage(){
   displayName.textContent = user.name;
-  balanceEl.textContent = user.balance + "€";
+  balanceEl.textContent = user.balance+"€";
   transactionsEl.innerHTML = "";
   user.transactions.slice().reverse().forEach(t=>{
     const li = document.createElement("li");
     li.textContent = t.text;
-    if(t.type==="expense") li.style.color = "red";
-    else if(t.type==="income") li.style.color = "#00ff00";
+    li.style.color = (t.type==="expense")?"red":"#00ff00";
     transactionsEl.appendChild(li);
   });
 }
 
-// Page navigation
+// Navigation
 function showTransfer(){ bankPage.classList.add("hidden"); transferPage.classList.remove("hidden"); }
 function showDeposit(){ bankPage.classList.add("hidden"); depositPage.classList.remove("hidden"); }
 function showWithdraw(){ bankPage.classList.add("hidden"); withdrawPage.classList.remove("hidden"); }
@@ -83,7 +75,7 @@ function goBack(){
   updateBankPage();
 }
 
-// Transfer function
+// Transfer
 function makeTransfer(){
   const recipient = document.getElementById("recipient").value;
   const accountNumber = document.getElementById("accountNumber").value;
@@ -104,7 +96,7 @@ function makeTransfer(){
   });
 }
 
-// Deposit function
+// Deposit
 function makeDeposit(){
   const amount = parseFloat(document.getElementById("depositAmount").value);
   if(isNaN(amount) || amount<=0){
@@ -119,7 +111,7 @@ function makeDeposit(){
   });
 }
 
-// Withdraw function
+// Withdraw
 function makeWithdraw(){
   const amount = parseFloat(document.getElementById("withdrawAmount").value);
   if(isNaN(amount) || amount<=0){
@@ -142,7 +134,7 @@ function makeWithdraw(){
 function logout(){
   bankPage.classList.add("hidden");
   loginPage.classList.remove("hidden");
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
-  loginError.textContent = "";
+  document.getElementById("username").value="";
+  document.getElementById("password").value="";
+  loginError.textContent="";
 }
