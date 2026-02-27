@@ -1,0 +1,79 @@
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f4f4;
+  text-align:center;
+  padding:20px;
+}
+
+.page{
+  display:block;
+}
+
+.hidden{
+  display:none;
+}
+
+h1,h2{
+  color:#d50000; /* 汇丰红 */
+}
+
+input{
+  display:block;
+  margin:10px auto;
+  padding:10px;
+  width:80%;
+  font-size:16px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+button{
+  padding:10px 20px;
+  margin:10px;
+  font-size:16px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#d50000;
+  color:white;
+  transition: all 0.2s ease;
+}
+
+button:hover{
+  background:#a30000;
+}
+
+button:active{
+  transform: scale(0.95);
+}
+
+.balance-box{
+  background:white;
+  border-radius:12px;
+  padding:20px;
+  margin:20px auto;
+  width:90%;
+  max-width:300px;
+  border:1px solid #ccc;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+}
+
+li{
+  background:white;
+  padding:10px;
+  margin:5px auto;
+  width:90%;
+  max-width:300px;
+  border-radius:6px;
+  text-align:left;
+  border:1px solid #ccc;
+}
+
+.error{
+  color:red;
+  margin-top:10px;
+}
