@@ -1,64 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HSBC Bank</title>
+<title>HSBC Bank Simulator</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- 登录页 -->
+<!-- Login Page -->
 <div id="loginPage" class="page">
-  <h1>HSBC Login</h1>
-  <input type="text" id="username" placeholder="User Name">
+  <h1>HSBC Bank Login</h1>
+  <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Password">
   <button onclick="login()">Login</button>
   <div id="loginError" class="error"></div>
 </div>
 
-<!-- 银行主页 -->
+<!-- Bank Main Page -->
 <div id="bankPage" class="page hidden">
-  <h1>Welcome, <span id="displayName">Yuhang Zhao</span></h1>
+  <h1>Welcome, <span id="displayName">Zhao Yuhang</span></h1>
   <div class="balance-box">
-    <div>Balance</div>
-    <div id="balance">882581.89€</div>
+    <div>Account Balance</div>
+    <div id="balance">5000€</div>
   </div>
 
-  <h2>快速操作</h2>
+  <h2>Quick Actions</h2>
   <button onclick="showTransfer()">Transfer</button>
-  <button onclick="showDeposit()">Top up</button>
+  <button onclick="showDeposit()">Deposit</button>
   <button onclick="showWithdraw()">Withdraw</button>
-  <button onclick="logout()">Log out</button>
+  <button onclick="logout()">Logout</button>
 
   <h2>Transaction History</h2>
   <ul id="transactions"></ul>
 </div>
 
-<!-- 转账弹窗 -->
+<!-- Transfer Page -->
 <div id="transferPage" class="page hidden">
   <h2>Transfer</h2>
-  <input type="text" id="recipient" placeholder="Recipient's Name">
-  <input type="text" id="accountNumber" placeholder="Payment account number">
+  <input type="text" id="recipient" placeholder="Recipient Name">
+  <input type="text" id="accountNumber" placeholder="Account Number">
   <input type="number" id="transferAmount" placeholder="Amount (€)">
-  <button onclick="makeTransfer()">Confirm transfer</button>
-  <button onclick="goBack()">Return</button>
+  <button onclick="makeTransfer()">Confirm Transfer</button>
+  <button onclick="goBack()">Back</button>
 </div>
 
-<!-- 充值弹窗 -->
+<!-- Deposit Page -->
 <div id="depositPage" class="page hidden">
-  <h2>Top up</h2>
-  <input type="number" id="depositAmount" placeholder="金额 (€)">
-  <button onclick="makeDeposit()">Confirm Top up</button>
-  <button onclick="goBack()">return</button>
+  <h2>Deposit</h2>
+  <input type="number" id="depositAmount" placeholder="Amount (€)">
+  <button onclick="makeDeposit()">Confirm Deposit</button>
+  <button onclick="goBack()">Back</button>
 </div>
 
-<!-- 提现弹窗 -->
+<!-- Withdraw Page -->
 <div id="withdrawPage" class="page hidden">
   <h2>Withdraw</h2>
-  <input type="number" id="withdrawAmount" placeholder="金额 (€)">
-  <button onclick="makeWithdraw()">Confirm withdrawal</button>
-  <button onclick="goBack()">return</button>
+  <input type="number" id="withdrawAmount" placeholder="Amount (€)">
+  <button onclick="makeWithdraw()">Confirm Withdraw</button>
+  <button onclick="goBack()">Back</button>
 </div>
 
 <script src="script.js"></script>
