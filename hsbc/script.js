@@ -33,10 +33,12 @@ function login(){
   }
 }
 
-// Show progress (non-blocking)
+// Show progress (only during operation)
 function showProgress(callback){
+  progressOverlay.style.display = "block"; // 显示
   progressBar.style.width="0%";
   progressText.textContent="0%";
+
   let percent = 0;
   const interval = setInterval(()=>{
     percent += Math.floor(Math.random()*10)+10;
@@ -45,6 +47,7 @@ function showProgress(callback){
     progressText.textContent = percent+"%";
     if(percent>=100){
       clearInterval(interval);
+      progressOverlay.style.display = "none"; // 隐藏
       if(callback) callback();
     }
   },20);
