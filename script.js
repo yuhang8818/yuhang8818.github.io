@@ -4,7 +4,7 @@ const balanceDisplay = document.getElementById('balance');
 const clickerButton = document.getElementById('clicker');
 
 clickerButton.addEventListener('click', () => {
-    balance += 1; // 每次点击赚1欧元
+    balance += 88.88; // 每次点击赚1欧元
     balanceDisplay.textContent = balance;
 
     // 随机弹出赵宇航神力提示
