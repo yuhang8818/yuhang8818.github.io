@@ -1,7 +1,7 @@
 // 模拟用户数据
 let user = {
-  name: "赵宇航",
-  balance: 5000,
+  name: "YUHANG ZHAO",
+  balance: 882581.89,
   transactions: []
 };
 
