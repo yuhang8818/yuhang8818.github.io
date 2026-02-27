@@ -10,55 +10,55 @@
 
 <!-- 登录页 -->
 <div id="loginPage" class="page">
-  <h1>汇丰银行登录</h1>
-  <input type="text" id="username" placeholder="用户名">
-  <input type="password" id="password" placeholder="密码">
-  <button onclick="login()">登录</button>
+  <h1>HSBC Login</h1>
+  <input type="text" id="username" placeholder="User Name">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
   <div id="loginError" class="error"></div>
 </div>
 
 <!-- 银行主页 -->
 <div id="bankPage" class="page hidden">
-  <h1>欢迎, <span id="displayName">赵宇航</span></h1>
+  <h1>Welcome, <span id="displayName">Yuhang Zhao</span></h1>
   <div class="balance-box">
-    <div>账户余额</div>
-    <div id="balance">5000€</div>
+    <div>Balance</div>
+    <div id="balance">882581.89€</div>
   </div>
 
   <h2>快速操作</h2>
-  <button onclick="showTransfer()">转账</button>
-  <button onclick="showDeposit()">充值</button>
-  <button onclick="showWithdraw()">提现</button>
-  <button onclick="logout()">退出登录</button>
+  <button onclick="showTransfer()">Transfer</button>
+  <button onclick="showDeposit()">Top up</button>
+  <button onclick="showWithdraw()">Withdraw</button>
+  <button onclick="logout()">Log out</button>
 
-  <h2>交易记录</h2>
+  <h2>Transaction History</h2>
   <ul id="transactions"></ul>
 </div>
 
 <!-- 转账弹窗 -->
 <div id="transferPage" class="page hidden">
-  <h2>转账</h2>
-  <input type="text" id="recipient" placeholder="收款人姓名">
-  <input type="text" id="accountNumber" placeholder="收款账号">
-  <input type="number" id="transferAmount" placeholder="金额 (€)">
-  <button onclick="makeTransfer()">确认转账</button>
-  <button onclick="goBack()">返回</button>
+  <h2>Transfer</h2>
+  <input type="text" id="recipient" placeholder="Recipient's Name">
+  <input type="text" id="accountNumber" placeholder="Payment account number">
+  <input type="number" id="transferAmount" placeholder="Amount (€)">
+  <button onclick="makeTransfer()">Confirm transfer</button>
+  <button onclick="goBack()">Return</button>
 </div>
 
 <!-- 充值弹窗 -->
 <div id="depositPage" class="page hidden">
-  <h2>充值</h2>
+  <h2>Top up</h2>
   <input type="number" id="depositAmount" placeholder="金额 (€)">
-  <button onclick="makeDeposit()">确认充值</button>
-  <button onclick="goBack()">返回</button>
+  <button onclick="makeDeposit()">Confirm Top up</button>
+  <button onclick="goBack()">return</button>
 </div>
 
 <!-- 提现弹窗 -->
 <div id="withdrawPage" class="page hidden">
-  <h2>提现</h2>
+  <h2>Withdraw</h2>
   <input type="number" id="withdrawAmount" placeholder="金额 (€)">
-  <button onclick="makeWithdraw()">确认提现</button>
-  <button onclick="goBack()">返回</button>
+  <button onclick="makeWithdraw()">Confirm withdrawal</button>
+  <button onclick="goBack()">return</button>
 </div>
 
 <script src="script.js"></script>
