@@ -67,19 +67,8 @@ function draw() {
           strokeWeight(1);
           //Because the squares’ starting point is the top-left corner, to keep the largest square within the grid, you need to offset the x and y coordinates toward the top-left by half of the square’s width;
           square(ax-25,ay-25,random(50))
-        }
-        
+        }     
       }
     }
   }
-  //Finally, draw two randomly intersecting lines;
-  //Assign values to variables first; if you skip this step and directly use `random()` for the line coordinates, you won’t be able to create lines that are parallel to the x or y axis;
-  let lx=random(width);
-  let ly=random(height);
-  //Set the line color to red-blue tones and give it a random line width;
-  strokeWeight(random(10));
-  stroke(random(255),0,random(255));
-  line(lx,0,lx,height);
-  line(0,ly,width,ly);
-  
 }
